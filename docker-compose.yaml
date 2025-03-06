@@ -1,0 +1,33 @@
+version: '3.8'  # Version of Docker Compose file format
+
+services:
+  flask-app:
+    build: .  # Build the Docker image from the directory
+    container_name: flask_container  # Name of the container for the Flask app
+    ports:
+      - "5000:5000"  # port map  5000 from container to port 5000 on the host machine
+    depends_on:
+      - db  # db started before flask app
+    environment:
+      - DATABASE_URL=postgresql://postgres:root@db:5432/db_task_manager  # Set the DB URL environment variable
+    volumes:
+      - .:/app  
+    restart: always  # Ensure the container restarts if it is bug
+
+  # PostgreSQL database service
+  db:
+    image: postgres:15  # Use the  PostgreSQL image, version 15
+    container_name: postgres_container  # Name of the container for the PostgreSQL database
+    restart: always  # the container restarts if it crashes or bug is there
+    environment:
+      POSTGRES_USER: postgres  # PostgreSQL user acc to tool
+      POSTGRES_PASSWORD: root  # PostgreSQL password acc to tool
+      POSTGRES_DB: db_task_manager  # Set the name of the database to which u create
+    ports:
+      - "5432:5432"  # Map port 5432 from container to port 5432 on the host machine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist data in a named volume
+
+# volumes for persistent data storage
+volumes:
+  postgres_data:  # This is for the volume will store PostgreSQL data

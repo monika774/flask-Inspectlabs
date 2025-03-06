@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Task Manager</h1>
+            <div id="user-info">
+                <span id="username"></span>
+                <button id="logout-btn" class="btn btn-danger">Logout</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- Authentication  Forms -->
+            <div id="auth-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="register">Register</button>
+                </div>
+                
+                <div id="login-form" class="auth-form active">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter password">
+                    </div>
+                    <button id="login-btn" class="btn btn-primary">Login</button>
+                    <p id="login-error" class="error-message"></p>
+                </div>
+                
+                <div id="register-form" class="auth-form">
+                    <h2>Register</h2>
+                    <div class="form-group">
+                        <label for="register-username">Username</label>
+                        <input type="text" id="register-username" placeholder="Choose a username">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" placeholder="Create a password">
+                    </div>
+                    <button id="register-btn" class="btn btn-primary">Register</button>
+                    <p id="register-error" class="error-message"></p>
+                </div>
+            </div>
+
+            <!-- Task Management -->
+            <div id="task-container" class="hidden">
+                <div class="task-form-container">
+                    <h2>Add New Task</h2>
+                    <form id="task-form">
+                        <div class="form-group">
+                            <label for="task-title">Title</label>
+                            <input type="text" id="task-title" placeholder="Task title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-description">Description</label>
+                            <textarea id="task-description" placeholder="Task description"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Task</button>
+                    </form>
+                </div>
+                
+                <div class="tasks-list-container">
+                    <h2>Your Tasks</h2>
+                    <div class="tasks-filter">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="active">Active</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                    </div>
+                    <div id="tasks-list">
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Task Edit Modal -->
+        <div id="edit-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Edit Task</h2>
+                <form id="edit-form">
+                    <input type="hidden" id="edit-task-id">
+                    <div class="form-group">
+                        <label for="edit-task-title">Title</label>
+                        <input type="text" id="edit-task-title" placeholder="Task title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-task-description">Description</label>
+                        <textarea id="edit-task-description" placeholder="Task description"></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label for="edit-task-completed">
+                            <input type="checkbox" id="edit-task-completed">
+                            Completed
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="static/js/app.js"></script>
+</body>
+</html>
